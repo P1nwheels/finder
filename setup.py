@@ -9,8 +9,8 @@ def requires():
 setup(
     name="finder",
     author="Pinwheel",
-    author_email="pin.wheel@gmail.com",
-    version="0.0.0",
+    author_email="redacted for now, I didn't make that email in time. Got taken.", # oops
+    version="0.0.1", # ahahaa
     description="finds whatever you need :eyes:",
     url="htts://github.com/P1nwheels/finder",
     packages=find_packages(),
