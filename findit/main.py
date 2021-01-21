@@ -23,6 +23,16 @@ def search_text_regex(rtext, regex):
         click.echo(f"\n  Result {n}:\n    {result}")
 
 
+def is_valid_link(link):
+    match = re.match(
+        r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)",
+        link
+        )
+    if match:
+        return True
+    return False
+
+
 @click.group()
 @click.pass_context
 def cli(ctx):
@@ -35,5 +45,8 @@ def cli(ctx):
 @click.argument("regex", default=r"\d\. [ -/:-~]+")
 def regsearch(pad, link, regex):
     """Search LINK using REGEX"""
-    regex = r"(" + regex + r")" if not pad else r"(.{,50}" + regex + r".{,50})"
-    search_text_regex(get_response_text(link), regex)
+    if is_valid_link(link):
+        regex = r"(" + regex + r")" if not pad else r"(.{,50}" + regex + r".{,50})"
+        search_text_regex(get_response_text(link), regex)
+    else:
+        raise click.BadParameter("Please provide a valid link")
