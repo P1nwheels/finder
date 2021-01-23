@@ -10,7 +10,7 @@ setup(
     name="findit", # changed name because a buddy just told me apples file manager is called Finder
     author="Pinwheel",
     author_email="pnwheelz0x13@gmail.com",
-    version="0.0.1", # ahahaa
+    version="0.0.3", # ahahaa
     description="finds whatever you need :eyes:",
     url="htts://github.com/P1nwheels/finder",
     packages=find_packages(),

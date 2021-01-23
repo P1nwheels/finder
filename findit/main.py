@@ -50,3 +50,19 @@ def regsearch(pad, link, regex):
         search_text_regex(get_response_text(link), regex)
     else:
         raise click.BadParameter("Please provide a valid link")
+
+
+@cli.command()
+@click.option("-f", "--file", required=True, type=click.File("r"))
+@click.option("-i", "--insensitive", is_flag=True, help="Case insensitive")
+@click.argument("query", default="apples")
+def fsearch(file, insensitive, query):
+    """Search a file for a query."""
+    query = query.lower() if insensitive else query
+    lines = file.readlines()
+    for n, line in enumerate(lines, start=1):
+        if query in line:
+            click.echo(f"\n  Result {n}:\n    {line}")
+
+
+# Click really makes this stuff super easy huh? Sheesh, I love it.
