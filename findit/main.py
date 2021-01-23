@@ -58,11 +58,14 @@ def regsearch(pad, link, regex):
 @click.argument("query", default="apples")
 def fsearch(file, insensitive, query):
     """Search a file for a query."""
-    query = query.lower() if insensitive else query
     lines = file.readlines()
     for n, line in enumerate(lines, start=1):
-        if query in line:
-            click.echo(f"\n  Result {n}:\n    {line}")
+        if insensitive:
+            if query.lower() in line.lower():
+                click.echo(f"\n  Line {n}:\n    {line}")
+        else:
+            if query in line:
+                click.echo(f"\n  Line {n}:\n    {line}")            
 
 
 # Click really makes this stuff super easy huh? Sheesh, I love it.
