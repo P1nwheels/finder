@@ -46,7 +46,8 @@ def cli(ctx):
 def regsearch(pad, link, regex):
     """Search LINK using REGEX"""
     if is_valid_link(link):
-        regex = r"(" + regex + r")" if not pad else r"(.{,50}" + regex + r".{,50})"
+        # Pretty neat, you can actually combine raw strings and f-string.
+        regex = rf"({regex})" if not pad else r"(.{,50}" + regex + r".{,50})"
         search_text_regex(get_response_text(link), regex)
     else:
         raise click.BadParameter("Please provide a valid link")
